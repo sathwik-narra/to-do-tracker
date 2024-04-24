@@ -7,7 +7,7 @@ export default function TaskCards({ tasks }: { tasks: Array<Tasks> }) {
   return (
     <Flex flexDirection="column" flex="1" padding="5">
       {tasks.map(({ title }, key) => {
-        return <KanbanCard title={title} key={key} index={key} />;
+        return <TaskCard title={title} key={key} index={key} />;
       })}
     </Flex>
   );
@@ -18,7 +18,7 @@ interface TaskCardProps {
   index: number;
 }
 
-export const KanbanCard = ({ title, index }: TaskCardProps) => {
+export const TaskCard = ({ title, index }: TaskCardProps) => {
   const { attributes, listeners, setNodeRef, transform } = useDraggable({
     id: title,
     data: {
