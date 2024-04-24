@@ -12,28 +12,28 @@ export default function Tracker() {
   // const [inProgressItems, setInProgressItems] = useState<Array<Tasks>>([]);
   // const [uItems, setuItems] = useState<Array<Tasks>>([]);
 
-  const taskBasedOnStatus = useSelector(initTasks);
-  console.log('tasks from store ', taskBasedOnStatus);
+  const tasksFromStore = useSelector(initTasks);
+  console.log('tasks from store ', tasksFromStore);
 
   const dispatch = useDispatch();
 
-  const todoItems: Tasks[] = taskBasedOnStatus.filter((task) => task.parent === "ToDo");
-  const doneItems: Tasks[] = taskBasedOnStatus.filter((task) => task.parent === "Done");
-  const inProgressItems: Tasks[] = taskBasedOnStatus.filter(
+  const todoItems: Tasks[] = tasksFromStore.filter((task) => task.parent === "ToDo");
+  const doneItems: Tasks[] = tasksFromStore.filter((task) => task.parent === "Done");
+  const inProgressItems: Tasks[] = tasksFromStore.filter(
     (task) => task.parent === "In Progress"
   );
-  const uItems: Tasks[] = taskBasedOnStatus.filter((task) => task.parent === "Unassigned");
+  const uItems: Tasks[] = tasksFromStore.filter((task) => task.parent === "Unassigned");
 
 
   // useEffect(() => {
-    // setTodoItems(taskBasedOnStatus.filter((task) => task.parent === "ToDo"));
-    // setDoneItems(taskBasedOnStatus.filter((task) => task.parent === "Done"));
+    // setTodoItems(tasksFromStore.filter((task) => task.parent === "ToDo"));
+    // setDoneItems(tasksFromStore.filter((task) => task.parent === "Done"));
     // setInProgressItems(
-    //   taskBasedOnStatus.filter((task) => task.parent === "In Progress")
+    //   tasksFromStore.filter((task) => task.parent === "In Progress")
     // );
-    // setuItems(taskBasedOnStatus.filter((task) => task.parent === "Unassigned"));
+    // setuItems(tasksFromStore.filter((task) => task.parent === "Unassigned"));
 
-  // }, [taskBasedOnStatus]);
+  // }, [tasksFromStore]);
 
   const addNewTask = (title: string) => {
     dispatch(add({ title, parent: "Unassigned" }));
