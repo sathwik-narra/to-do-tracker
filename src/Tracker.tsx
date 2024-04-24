@@ -1,8 +1,7 @@
-import { closestCorners, DndContext, rectIntersection } from "@dnd-kit/core";
+import { closestCorners, DndContext } from "@dnd-kit/core";
 import TaskColumn from "./TaskColumn";
 import AddTask from "./AddTask";
 import { Flex } from "@chakra-ui/react";
-import { useEffect, useState } from "react";
 import { Tasks} from "./types";
 import { useDispatch, useSelector } from "react-redux";
 import { initTasks, add, move } from "./taskSlice";
