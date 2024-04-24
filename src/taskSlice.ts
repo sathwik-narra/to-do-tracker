@@ -17,29 +17,31 @@ export const taskSlice = createSlice({
   // `createSlice` will infer the state type from the `initialState` argument
   initialState : initialState,
   reducers: {
-    add: (state, action: PayloadAction<TaskState>) => {
+    todo: (state, action: PayloadAction<any>) => {
       const task = action.payload;
       console.log('task store ', task);
-      state.push(task);
-      console.log('state store ', state);
-      return state;
+      switch (task.type) {
+        case 'move':
+          const index = state.findIndex(t => t.title === task.title);
+          state[index].parent = task.parent;
+          // console.log('state store ', state);
+          return state;
+        case 'add':
+          state.push(task);
+          console.log('state store ', state);
+          return state;
+        default:
+          break;
+      }
     },
-    move: (state, action: PayloadAction<TaskState>) => {
-      const task = action.payload;
-      console.log('task store ', task);
-      const index = state.findIndex(t => t.title === task.title);
-      state[index].parent = task.parent;
-      // console.log('state store ', state);
-      return state;
-    }
   },
 })
 
-export const { add, move } = taskSlice.actions
+export const { todo } = taskSlice.actions
 
 // Other code such as selectors can use the imported `RootState` type
 export const initTasks = (state: RootState) => {
-  return state.add;
+  return state.todo;
 }
 
 export default taskSlice.reducer

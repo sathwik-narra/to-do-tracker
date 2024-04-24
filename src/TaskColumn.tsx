@@ -60,7 +60,7 @@ export default function TaskColumn({ title, items }: TaskColumnProps) {
       <Text fontWeight="bold">{title}</Text>
       <Flex
         ref={setNodeRef}
-        backgroundColor="gray.200"
+        backgroundColor="gray.600"
         borderRadius="8"
         flex="1"
         padding="2"

@@ -4,7 +4,7 @@ import AddTask from "./AddTask";
 import { Flex } from "@chakra-ui/react";
 import { Tasks} from "./types";
 import { useDispatch, useSelector } from "react-redux";
-import { initTasks, add, move } from "./taskSlice";
+import { initTasks, todo } from "./taskSlice";
 
 export default function Tracker() {
   // const [todoItems, setTodoItems] = useState<Array<Tasks>>([]);
@@ -17,12 +17,12 @@ export default function Tracker() {
 
   const dispatch = useDispatch();
 
-  const todoItems: Tasks[] = tasksFromStore.filter((task) => task.parent === "ToDo");
-  const doneItems: Tasks[] = tasksFromStore.filter((task) => task.parent === "Done");
+  const todoItems: Tasks[] = tasksFromStore.filter((task: any) => task.parent === "ToDo");
+  const doneItems: Tasks[] = tasksFromStore.filter((task: any)=> task.parent === "Done");
   const inProgressItems: Tasks[] = tasksFromStore.filter(
-    (task) => task.parent === "In Progress"
+    (task: any)=> task.parent === "In Progress"
   );
-  const uItems: Tasks[] = tasksFromStore.filter((task) => task.parent === "Unassigned");
+  const uItems: Tasks[] = tasksFromStore.filter((task: any)=> task.parent === "Unassigned");
 
 
   // useEffect(() => {
@@ -36,7 +36,7 @@ export default function Tracker() {
   // }, [tasksFromStore]);
 
   const addNewTask = (title: string) => {
-    dispatch(add({ title, parent: "Unassigned" }));
+    dispatch(todo({type: "add", title, parent: "Unassigned" }));
   };
 
   return (
@@ -45,7 +45,7 @@ export default function Tracker() {
       onDragEnd={(e) => {
         console.log('event, ', e);
         const title = e.active.data.current?.title ?? "";
-        dispatch(move({ title, parent: e.collisions?.[0]?.id ?? "Unassigned" }));
+        dispatch(todo({ type: "move", title, parent: e.collisions?.[0]?.id ?? "Unassigned" }));
       }}
     >
       <Flex flexDirection="column">
